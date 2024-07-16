@@ -1,0 +1,103 @@
+#### Here is the link to the slides on R Pubs:
+
+https://rpubs.com/doctahmanhattan/hospitalappslides
+###
+
+---
+title: "Report_hospital app"
+author: "doctahmanhattan"
+date: "2024-07-16"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+Creating a Shiny app to achieve this involves building a user interface (UI) to collect user inputs (state initials and illness) and a server logic to process these inputs and provide the relevant hospital information. Below is a basic implementation of such an app in R.
+
+First, you'll need a dataset containing information about hospitals and the illnesses they specialize in for each state. For the sake of this example, let's assume you have a data frame named hospital_data with columns: State, Illness, and Hospital.
+
+Here is the Shiny app code
+
+## Slide with Bullets
+
+- Replace the sample hospital_data data frame with your actual data containing state, illness, and hospital information.
+- The tolower function ensures that the illness input is case insensitive.
+- The 'eventReactive' function ensures that the hospital search is performed only when the submit button is pressed.
+
+## Slide with R Output
+
+```
+library(shiny)
+library(dplyr)
+
+# Sample data frame (replace this with your actual data)
+hospital_data <- data.frame(
+  State = c("CA", "NY", "TX", "CA", "NY", "TX"),
+  Illness = c("cancer", "cardiology", "neurology", "cardiology", "cancer", "neurology"),
+  Hospital = c("UCLA Medical Center", "New York-Presbyterian", "Houston Methodist", "Stanford Health Care", "Mount Sinai", "UT Southwestern")
+)
+
+# Define UI for application
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Best Hospital Finder"),
+  
+  # Sidebar layout with input and output definitions
+  sidebarLayout(
+    
+    # Sidebar panel for inputs
+    sidebarPanel(
+      textInput("state", "Enter State Initials (e.g., CA for California):", ""),
+      textInput("illness", "Enter Illness:", ""),
+      actionButton("submit", "Submit")
+    ),
+    
+    # Main panel for displaying outputs
+    mainPanel(
+      textOutput("result")
+    )
+  )
+)
+
+# Define server logic
+server <- function(input, output) {
+  
+  # Reactive expression to process the user input and find the best hospital
+  result <- eventReactive(input$submit, {
+    state <- toupper(input$state)
+    illness <- tolower(input$illness)
+    
+    # Assuming 'hospital_data' is your data frame containing hospital info
+    hospital <- hospital_data %>%
+      filter(State == state, tolower(Illness) == illness) %>%
+      select(Hospital) %>%
+      slice(1) %>%
+      pull()
+    
+    if (is.null(hospital)) {
+      return("No matching hospital found.")
+    } else {
+      return(paste("The best hospital in", state, "for", illness, "is:", hospital))
+    }
+  })
+  
+  # Output the result
+  output$result <- renderText({
+    result()
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
