@@ -1,0 +1,24 @@
+library(shiny)
+
+# Define UI for application
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Best Hospital Finder"),
+  
+  # Sidebar layout with input and output definitions
+  sidebarLayout(
+    
+    # Sidebar panel for inputs
+    sidebarPanel(
+      textInput("state", "Enter State Initials (e.g., CA for California):", ""),
+      textInput("illness", "Enter Illness:", ""),
+      actionButton("submit", "Submit")
+    ),
+    
+    # Main panel for displaying outputs
+    mainPanel(
+      textOutput("result")
+    )
+  )
+)
