@@ -1,0 +1,67 @@
+##############
+The app can be found using the URL below:
+https://doctahmanhattan.shinyapps.io/Best_hospital_app/
+
+######
+
+
+####Best Hospital Finder Shiny App
+Overview
+The Best Hospital Finder Shiny App helps users find the best hospital in their state for a specific illness. Users simply need to enter their state's initials and the illness they are interested in, and the app will provide the name of the best hospital in that state for treating the illness.
+
+Requirements
+R (version 3.6 or higher)
+Shiny package
+dplyr package
+Installation
+Ensure that you have R installed on your computer. You can download it from CRAN.
+
+#Install the required R packages if you haven't already:
+install.packages("shiny")
+install.packages("dplyr")
+
+Running the App
+Save the app code in a file named app.R.
+
+Ensure that you have the hospital_data data frame available in your R environment. This data frame should contain the columns State, Illness, and Hospital.
+
+Run the Shiny app using the following command in your R console:
+shiny::runApp("path/to/your/app.R")
+
+Replace "path/to/your/app.R" with the actual path to your app.R file.
+
+Usage
+Enter State Initials:
+
+In the "Enter State Initials" field, input the two-letter initials of your state. For example, CA for California, NY for New York.
+Enter Illness:
+
+In the "Enter Illness" field, input the name of the illness you are interested in. The input is case-insensitive, meaning you can type Cancer, cancer, or CANCER.
+Submit:
+
+Click the "Submit" button to find the best hospital in your state for the specified illness.
+View Results:
+
+The app will display the name of the best hospital in your state for the illness you entered.
+Example
+Enter CA in the "Enter State Initials" field.
+Enter cancer in the "Enter Illness" field.
+Click the "Submit" button.
+The app will display: "The best hospital in CA for cancer is: UCLA Medical Center."
+Data Format
+Ensure your hospital_data data frame follows this structure:
+
+State	Illness	Hospital
+CA	cancer	UCLA Medical Center
+NY	cardiology	New York-Presbyterian
+TX	neurology	Houston Methodist
+...	...	...
+Troubleshooting
+No matching hospital found: Ensure the state initials and illness are entered correctly.
+App not running: Verify the path to the app.R file and ensure all required packages are installed.
+Contact
+For further assistance, please contact @doctahmanhattan.
+
+This README document provides an overview, installation instructions, usage guidelines, and troubleshooting tips for users engaging with the Best Hospital Finder Shiny App. 
+
+You may access the app using the following link: https://doctahmanhattan.shinyapps.io/Best_hospital_app/
