@@ -1,0 +1,27 @@
+# Define server logic
+server <- function(input, output) {
+  
+  # Reactive expression to process the user input and find the best hospital
+  result <- eventReactive(input$submit, {
+    state <- toupper(input$state)
+    illness <- tolower(input$illness)
+    
+    # Assuming 'hospital_data' is your data frame containing hospital info
+    hospital <- hospital_data %>%
+      filter(State == state, tolower(Illness) == illness) %>%
+      select(Hospital) %>%
+      slice(1) %>%
+      pull()
+    
+    if (is.null(hospital)) {
+      return("No matching hospital found.")
+    } else {
+      return(paste("The best hospital in", state, "for", illness, "is:", hospital))
+    }
+  })
+  
+  # Output the result
+  output$result <- renderText({
+    result()
+  })
+}
